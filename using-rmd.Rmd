@@ -40,7 +40,14 @@ output: html_document
 ---
 ```
 
-It starts an ends with three dashes `---`, and has fields like the following: `title`, `author`, and `output`.
+It starts and ends with three dashes `---`, and has fields like the following: `title`, `author`, and `output`. 
+
+`title` and `author` are special inputs which place the title and author information at the top of the document in large font. They are optional!
+
+` output: html_document ` tells us we want this to be a HTML document - you'll see what this looks like in a moment!
+
+
+#### Some extra details
 
 The options in the YAML are actually passed down into the `render` function under the hood.
 
@@ -56,7 +63,7 @@ output:
 is the same as:
 
 ```r
-html_document(toc = TRUE, toc_depth = 2)
+render(file.Rmd, output_format = html_document(toc = TRUE, toc_depth = 2))
 ```
 
 ### Text
@@ -201,20 +208,20 @@ What's great about this is that if your data changes upstream, then you don't ne
 ### Your Turn {.exercise}
 
 1. Use the rstudio project you previously created, `rmd4sci-materials`, and create an rmarkdown document
-1. Run some brief summaries of the data in the rmarkdown document inside the `
+1. Run some brief summaries of the data in the rmarkdown document inside the `` ```{r chunk-part} ``
     - hist(data$)
     - How big is the data?
     - How many countries are there?
     - What was the lowest life expectancy in Australia's History?
     - How about the lowest GDP for Australia?
-    - Where does Australia rank in GDP in 1999?
+    - Where does Australia rank in GDP in 1997?
 
 <!-- # My philosophy on Rmarkdown -->
 
 <!-- - Keep it simple -->
 <!-- - focus on content -->
 
-## Nick's rmarkdown hygiene reccommendations
+## Nick's rmarkdown hygiene recommendations
 
 I highly recommend that each document you write has three chunks at the top.
 

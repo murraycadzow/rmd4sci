@@ -33,7 +33,7 @@ This section is heavily influenced by [Jenny Bryan's great blog post on project 
 Sometimes this is the first line of an R Script or R markdown file.
 
 ```r
-setwd("c:/really/long/file/path/to/this/directory)
+setwd("c:/really/long/file/path/to/this/directory")
 ```
 
 #### Question {.question}
@@ -58,7 +58,7 @@ data <- read_csv("c:/really/long/file/path/to/this/directory/data/mydata.csv")
 
 So while this has the effect of **making the file paths work in your file**, it is a problem. It is a problem because, among other things, using `setwd()` like this:
 
-* Has 0% chance of working on someone else's machine (**this includes you in >6 months**)
+* Has 0% chance of working on someone else's machine (**this could include you in 6 months!**)
 * Your file is not self-contained and portable. (Think: _"What if this folder moved to /Downloads, or onto another machine?"_)
 
 So, to get this to work, you need to hand edit the file path to your machine. 
@@ -67,20 +67,20 @@ This is painful. And when you do this all the time, it gets old, fast.
 
 ## What is a file path?
   
-So, this might all be a bit confusing if you don't know what a file path is. Briefly, a file path is the machine-readable directions to where files on your computer live. So, the file path:
+So, this might all be a bit confusing if you don't know what a file path is. A file path is the machine-readable directions to where files on your computer live. So, the file path:
 
 ```
-Users/njtierney/rmd4sci-materials/demo-gapminder.Rmd
+/Users/njtierney/Desktop/rmd4sci-materials/demo.R
 ```
 
-Describes the location of the file "demo-gapminder.Rmd". This could be visualised as:
+Describes the location of the file "demo.R". This could be visualised as:
 
 ```
 users
   └── njtierney
       └── Desktop
           └──  rmd4sci-materials
-               └──  demo.R
+               └── demo.R << THIS IS THE FILE HERE
                └── exercises
                └── exploratory-data-analysis
                    └── eda-document.Rmd
@@ -102,7 +102,7 @@ gsub(pattern = "/",
 So, if you want to read in the `gapminder.csv` file, you might need to write code like this:
 
 ```r
-gapminder <- read_csv("Users/njtierney/Desktop/rmd4sci-materials/data/gapminder.csv")
+gapminder <- read_csv("/Users/njtierney/Desktop/rmd4sci-materials/data/gapminder.csv")
 ```
 
 As we now know, this is a problem, because this is not portable code.
@@ -115,7 +115,8 @@ gapminder <- read_csv("data/gapminder.csv")
 
 ## Your Turn {.exercise}
 
-* (1-2 minutes) What folders are above the `health.csv` file in the following given string? `"users/miles/etc1010/week1/data/health.csv"`
+* (1-2 minutes) Imagine you see the following directory path: `"/Users/miles/etc1010/week1/data/health.csv"`
+what are the folders above the file, `health.csv`?
 
 * What would be the result of using the following code in `demo-gapminder.Rmd`, and then using the code, and then moving this to another location, say inside your C drive?
 
@@ -155,10 +156,10 @@ Let's open one together.
 
 ## Your Turn: Use your own rstudio project {.exercise}
 
-1. Run the following code to start a new rstudio project called "rmd4sci-monash"
+1. In RStudio, and run the following code to start a new rstudio project called "rmd4sci-materials".
 
 ```r
-usethis::use_course("bit.ly/rmd4sci-canberra")
+usethis::use_course("bit.ly/rmd4sci-materials")
 ```
 
 2. Follow the prompts to download this to your desktop and then run the rstudio project. (You can move it later if you like!)
@@ -171,10 +172,12 @@ usethis::use_course("bit.ly/rmd4sci-canberra")
 2. Why does the `read_csv` code work?
 3. Run the code inside the `exploratory-data-analysis` folder - `eda-script.R`.
 4. Does the `read_csv` code work?
+5. Run the code inside the `exploratory-data-analysis` folder - `eda-document.Rmd`, by clicking the "knit" button (we'll go into this in more detail soon!)
+6. Does it work?
 
 ## The "here" package
 
-Although tStudio projects help resolve file path problems, in some cases you might have many folders in your r project. To help navigate them appropriately, you can use the `here` package to provide the full path directory, in a compact way.
+Although RStudio projects help resolve file path problems, in some cases you might have many folders in your r project. To help navigate them appropriately, you can use the `here` package to provide the full path directory, in a compact way.
 
 ```r
 here::here("data")
@@ -195,12 +198,14 @@ here::here("data", "gapminder.csv")
 returns
 
 ```
-[1] "/Users/ntie0001/Desktop/rmd4sci-materials/data/gapminder.csv"
+[1] "/Users/njtierney/Desktop/rmd4sci-materials/data/gapminder.csv"
 ```
+
+(Note that these absolute file paths will indeed be different on my computer compared to yours - super neat!)
 
 You can read the above `here` code as:
 
-> In the folder `data`, there is a file called health.csv, can you please give me the full path to that file? 
+> In the folder `data`, there is a file called `gapminder.csv`, can you please give me the full path to that file? 
 
 This is really handy for a few reasons:
 
@@ -257,9 +262,7 @@ And click "create project".
 knitr::include_graphics(here::here("figs", "rstudio-create-proj-4.png"))
 ```
 
-Done!
-
-## Summary
+D# Summary
 
 In this lesson we've:
 
