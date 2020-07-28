@@ -76,7 +76,7 @@ So, this might all be a bit confusing if you don't know what a file path is. A f
 Describes the location of the file "demo.R". This could be visualised as:
 
 ```
-users
+Users
   └── njtierney
       └── Desktop
           └──  rmd4sci-materials
